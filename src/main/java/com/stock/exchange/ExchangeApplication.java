@@ -21,10 +21,11 @@ public class ExchangeApplication {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
+			String[] pathArray = new String[]{"/register","/create-user"};
 			http.csrf().disable()
 					.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 					.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/register").permitAll()
+					.antMatchers(HttpMethod.POST, pathArray).permitAll()
 					.anyRequest().authenticated();
 		}
 	}
